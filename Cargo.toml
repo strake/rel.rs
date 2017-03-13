@@ -1,6 +1,8 @@
 [package]
 name = "rel"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["M Farkas-Dyck <strake888@gmail.com>"]
 description = "Relations"
 license = "MIT OR Apache-2.0"
+documentation = "https://docs.rs/rel/"
+repository = "https://github.com/strake/rel.rs"
