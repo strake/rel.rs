@@ -3,7 +3,7 @@
 use core::cmp::Ordering;
 use core::cmp::Ordering::*;
 
-pub trait TotalOrderRelation<A> {
+pub trait TotalOrderRelation<A: ?Sized> {
     fn cmp(&A, &A) -> Ordering;
 
     fn less(x: &A, y: &A) -> bool { Self::cmp(x, y) == Less }
@@ -14,10 +14,10 @@ pub trait TotalOrderRelation<A> {
 pub enum Ord {}
 pub struct Dual<Rel>(Rel);
 
-impl<A: ::core::cmp::Ord> TotalOrderRelation<A> for Ord {
+impl<A: ?Sized + ::core::cmp::Ord> TotalOrderRelation<A> for Ord {
     fn cmp(x: &A, y: &A) -> Ordering { ::core::cmp::Ord::cmp(x, y) }
 }
 
-impl<A, Rel: TotalOrderRelation<A>> TotalOrderRelation<A> for Dual<Rel> {
+impl<A: ?Sized, Rel: TotalOrderRelation<A>> TotalOrderRelation<A> for Dual<Rel> {
     fn cmp(x: &A, y: &A) -> Ordering { Rel::cmp(y, x) }
 }
